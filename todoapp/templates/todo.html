@@ -1,0 +1,127 @@
+{%extends 'base.html'%}
+{%block style %}
+
+.container{
+    position: relative;
+    margin-left: 20px;
+    display :flex;
+    justify-content:center;
+}
+
+h1{
+    color:#20baba;
+}
+form{
+   
+}
+        .adder{
+            margin-top: 5px;
+            margin-bottom : 15px;
+        }
+input{
+    padding-left: 5px;
+    width: 500px;
+    padding:10px;
+    font-size: large;
+    border-radius: 7px;
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+    outline: none;
+}
+input[type=submit]{
+    cursor: pointer;
+    width:100px;
+    background: #4dd0f4;
+    color: rgb(6, 44, 44);
+    outline: none;
+    border:none;
+    font-weight: bolder;
+    border: 2px solid rgb(14, 39, 81);
+    border-radius: 10px;
+
+}
+input[type=submit]:hover{
+    background: #0a7998;
+}
+input[type=submit]:active{
+    background: #26123e;
+    color:whitesmoke;
+}
+button{
+    margin: 0;
+    cursor: pointer;
+    width:100px;
+    padding:0;
+    height : 25px;
+    background: #f44d4d;
+    color: azure;
+    outline: none;
+    border:none;
+    font-family: sans-serif;
+    border-radius: 5px;
+    font-size: 15px;    
+    font-weight : bold;
+}
+button:hover{
+    background: #f50404;
+}
+button:active{
+    background:#9dea32;
+    color:black;
+
+}
+.list{
+    
+    border: 2px solid gray;
+    /*margin-top : 15px;*/
+    padding: 5px;
+    width: 610px;
+    display:flex;
+    background: white;
+    justify-content:space-between;
+    border-radius: 8px;
+}
+.work{
+    display: inline;
+    justify-content: space-between;
+}
+li{
+    list-style: none;
+}
+#delete_all{
+    float: right;
+    height: 30px;
+}
+.del{
+    margin-top: 15px ;
+    width:618px;
+}
+{% endblock style%}
+
+{% block body %}
+
+<div class="container">
+<div class="add">
+
+    <h1>Add item</h1>
+    <form class="adder" action="/add" method="POST">  
+        
+        <input type="text" name ='text' placeholder="Type Here..." required autofocus>
+        <input type="submit">
+    </form>
+</div>
+
+<div class="content">
+{%for todo_item in todo_items %}
+<div class="list">
+        <p class='work'>{{todo_item.id}}.{{todo_item.text}}</p>
+        <form action="delete/{{todo_item.id}}" method="post">
+            <button type="submit" >Delete</button></form>
+            </div>
+            {%endfor%}
+            {%if todo_items %}
+            <form class='del' action="deleteall" method="post">
+                <button id ='delete_all' type="submit" >Delete All</button></form></div>
+            {% endif %}
+</div>  
+{% endblock body %}
